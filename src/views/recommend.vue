@@ -1,22 +1,40 @@
 <template>
   <div class="recommend">
-    <div class="recommend-content">
-      <div class="slider-wrapper">
-        <div class="slider-content">
-          <Slide :slider-list="sliderList" v-if="sliderList.length"></Slide>
+    <Scroll class="recommend-content">
+        <div>
+          <div class="slider-wrapper">
+            <div class="slider-content">
+              <Slide :slider-list="sliderList" v-if="sliderList.length"></Slide>
+            </div>
+          </div>
+          <div class="recommend-list">
+            <h1 class="list-title">热门歌单推荐</h1>
+            <ul>
+              <li class="item" v-for="item in albumsList" :key="item.id" @click="goToDetails(item)">
+                <div class="icon">
+                  <img :src="item.pic" width="60" height="60">
+                </div>
+                <div class="text">
+                  <h2 class="name">{{item.username}}</h2>
+                  <p class="title">{{item.title}}</p>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
-    </div>
+    </Scroll>
   </div>
 </template>
 
 <script>
 import { getRecommend } from '@/service/recommend'
 import Slide from '@/components/base/slide/Slide.vue'
+import Scroll from '@/components/base/scroll/Scroll.vue'
 export default {
   name: 'recommend',
   components: {
-    Slide
+    Slide,
+    Scroll
   },
   data () {
     return {
@@ -28,7 +46,12 @@ export default {
     const result = await getRecommend()
     console.log(result)
     this.sliderList = result.sliders
-    this.albumsList = result.albumsList
+    this.albumsList = result.albums
+  },
+  methods: {
+    goToDetails(item) {
+      console.log(item)
+    }
   }
 }
 </script>
