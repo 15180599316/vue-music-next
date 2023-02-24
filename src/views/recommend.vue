@@ -1,18 +1,18 @@
 <template>
-  <div class="recommend">
+  <div class="recommend" v-loading:[title]="loading">
     <Scroll class="recommend-content">
         <div>
           <div class="slider-wrapper">
             <div class="slider-content">
-              <Slide :slider-list="sliderList" v-if="sliderList.length"></Slide>
+              <Slide :slider-list="sliders" v-if="sliders.length"></Slide>
             </div>
           </div>
           <div class="recommend-list">
-            <h1 class="list-title">热门歌单推荐</h1>
+            <h1 class="list-title" v-show="!loading">热门歌单推荐</h1>
             <ul>
-              <li class="item" v-for="item in albumsList" :key="item.id" @click="goToDetails(item)">
+              <li class="item" v-for="item in albums" :key="item.id" @click="goToDetails(item)">
                 <div class="icon">
-                  <img :src="item.pic" width="60" height="60">
+                  <img v-lazy="item.pic" width="60" height="60">
                 </div>
                 <div class="text">
                   <h2 class="name">{{item.username}}</h2>
@@ -38,15 +38,20 @@ export default {
   },
   data () {
     return {
-      sliderList: [],
-      albumsList: []
+      sliders: [],
+      albums: [],
+      title: '正在加载...'
+    }
+  },
+  computed: {
+    loading() {
+      return !this.sliders.length && !this.albums.length
     }
   },
  async created () {
     const result = await getRecommend()
-    console.log(result)
-    this.sliderList = result.sliders
-    this.albumsList = result.albums
+    this.sliders = result.sliders
+    this.albums = result.albums
   },
   methods: {
     goToDetails(item) {
