@@ -1,5 +1,8 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import recommend from '@/views/recommend.vue'
+const Singer = () => import('@/views/singer.vue' /* webpackChunkName: "singer" */)
+const SingerDetail = () => import('@/views/singer-detail'/* webpackChunkName: "singer-detail" */)
+const UserCenter = () => import('@/views/user-center'/* webpackChunkName: "user-center" */)
 
 const routes = [
   {
@@ -13,8 +16,13 @@ const routes = [
   },
   {
     path: '/singer',
-    name: 'singer',
-    component: () => import(/* webpackChunkName: "singer" */ '../views/singer.vue')
+    component: Singer,
+    children: [
+      {
+        path: ':id',
+        component: SingerDetail
+      }
+    ]
   }, {
     path: '/top-list',
     name: 'topList',
@@ -24,6 +32,12 @@ const routes = [
     path: '/search',
     name: 'search',
     component: () => import(/* webpackChunkName: "search" */ '../views/search.vue')
+  },
+  {
+    path: '/user',
+    components: {
+      user: UserCenter
+    }
   }
 ]
 
