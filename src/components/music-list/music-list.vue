@@ -35,9 +35,11 @@
     :style="`top:${ bgImageHeight }px`"
     :probe-type="3"
     @scroll="onScroll"
+    v-loading="loading"
+    v-no-result.[noResultText]="noResult"
     >
       <div class="song-list-wrapper">
-        <song-list :songs="songs"></song-list>
+        <song-list :songs="songs" @select="selectItemPlay"></song-list>
       </div>
     </scroll>
   </div>
@@ -46,6 +48,7 @@
 <script>
 import SongList from '@/components/base/song-list/song-list.vue'
 import Scroll from '@/components/base/scroll/Scroll.vue'
+import { mapActions } from 'vuex'
 const TITLE_HEIGHT = 40
 
 export default {
@@ -57,9 +60,10 @@ export default {
   props: {
     title: String,
     pic: String,
-    loading: {
-      type: Boolean,
-      default: true
+    loading: Boolean,
+    noResultText: {
+      type: String,
+      default: '抱歉，没有找到可播放的歌曲'
     },
     songs: {
       type: Array,
@@ -67,6 +71,9 @@ export default {
     }
   },
   computed: {
+    noResult() {
+      return !this.loading && !this.songs.length
+    },
     playBtnStyle() {
       let display = ''
       if (this.scrollY >= this.maxTranslateY) {
@@ -130,8 +137,18 @@ export default {
       this.scrollY = -pos.y
     },
     random() {
-
-    }
+      this.randomPlay(this.songs)
+    },
+    selectItemPlay({ song, index }) {
+      this.selectPlay({
+        list: this.songs,
+        index
+      })
+    },
+    ...mapActions([
+      'randomPlay',
+      'selectPlay'
+    ])
   }
 }
 </script>
