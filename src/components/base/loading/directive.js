@@ -1,4 +1,6 @@
-import loading from '@/components/base/loading/loading.vue'
+import Loading from './loading'
 import createLoadingLikeDirective from '@/assets/js/create-loading-like-directive'
- const loadingDirective = createLoadingLikeDirective(loading)
+
+const loadingDirective = createLoadingLikeDirective(Loading)
+
 export default loadingDirective

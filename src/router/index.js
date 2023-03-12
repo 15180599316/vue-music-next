@@ -1,18 +1,28 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import recommend from '@/views/recommend.vue'
-const Singer = () => import('@/views/singer.vue' /* webpackChunkName: "singer" */)
+
+const Recommend = () => import('@/views/recommend'/* webpackChunkName: "recommend" */)
+const Singer = () => import('@/views/singer'/* webpackChunkName: "singer" */)
+const TopList = () => import('@/views/top-list'/* webpackChunkName: "top-list" */)
+const Search = () => import('@/views/search'/* webpackChunkName: "search" */)
 const SingerDetail = () => import('@/views/singer-detail'/* webpackChunkName: "singer-detail" */)
+const Album = () => import('@/views/album'/* webpackChunkName: "album" */)
+const TopDetail = () => import('@/views/top-detail'/* webpackChunkName: "top-detail" */)
 const UserCenter = () => import('@/views/user-center'/* webpackChunkName: "user-center" */)
 
 const routes = [
   {
     path: '/',
-    redirect: 'recommend'
+    redirect: '/recommend'
   },
   {
     path: '/recommend',
-    name: 'recommend',
-    component: recommend
+    component: Recommend,
+    children: [
+      {
+        path: ':id',
+        component: Album
+      }
+    ]
   },
   {
     path: '/singer',
@@ -23,15 +33,26 @@ const routes = [
         component: SingerDetail
       }
     ]
-  }, {
+  },
+  {
     path: '/top-list',
-    name: 'topList',
-    component: () => import(/* webpackChunkName: "topList" */ '../views/topList.vue')
+    component: TopList,
+    children: [
+      {
+        path: ':id',
+        component: TopDetail
+      }
+    ]
   },
   {
     path: '/search',
-    name: 'search',
-    component: () => import(/* webpackChunkName: "search" */ '../views/search.vue')
+    component: Search,
+    children: [
+      {
+        path: ':id',
+        component: SingerDetail
+      }
+    ]
   },
   {
     path: '/user',
@@ -42,7 +63,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHashHistory(process.env.BASE_URL),
   routes
 })
 
