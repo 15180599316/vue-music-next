@@ -77,7 +77,7 @@
 </template>
 
 <script>
-  import Scroll from '@/components/base/scroll/scroll'
+  import Scroll from '@/components/base/scroll/scroll.vue'
   import Confirm from '@/components/base/confirm/confirm'
   import AddSong from '@/components/add-song/add-song'
   import { ref, computed, nextTick, watch } from 'vue'

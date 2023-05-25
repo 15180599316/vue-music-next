@@ -1,5 +1,5 @@
 import { h, mergeProps, withCtx, renderSlot, ref, computed, watch, nextTick } from 'vue'
-import Scroll from '@/components/base/scroll/scroll'
+import Scroll from '@/components/base/scroll/scroll.vue'
 import { useStore } from 'vuex'
 
 export default {

@@ -21,8 +21,8 @@
 </template>
 
 <script>
-  import Header from '@/components/header/header'
-  import Tab from '@/components/tab/tab'
+  import Header from '@/components/header/header.vue'
+  import Tab from '@/components/tab/tab.vue'
   import Player from '@/components/player/player'
   import { mapState } from 'vuex'
 

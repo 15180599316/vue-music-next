@@ -141,7 +141,7 @@
   import useAnimation from './use-animation'
   import usePlayHistory from './use-play-history'
   import ProgressBar from './progress-bar'
-  import Scroll from '@/components/base/scroll/scroll'
+  import Scroll from '@/components/base/scroll/scroll.vue'
   import MiniPlayer from './mini-player'
   import { formatTime } from '@/assets/js/util'
   import { PLAY_MODE } from '@/assets/js/constant'

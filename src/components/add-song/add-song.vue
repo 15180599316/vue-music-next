@@ -71,7 +71,7 @@
   import SearchInput from '@/components/search/search-input'
   import Suggest from '@/components/search/suggest'
   import Switches from '@/components/base/switches/switches'
-  import Scroll from '@/components/base/scroll/scroll'
+  import Scroll from '@/components/base/scroll/scroll.vue'
   import SongList from '@/components/base/song-list/song-list'
   import SearchList from '@/components/base/search-list/search-list'
   import Message from '@/components/base/message/message'
