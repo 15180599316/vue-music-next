@@ -158,7 +158,6 @@ export default {
         const songReady = ref(false)
         const currentTime = ref(0)
         let progressChanging = false
-        let test = 1
 
         // vuex
         const store = useStore()
